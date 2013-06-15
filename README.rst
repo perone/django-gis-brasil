@@ -1,5 +1,5 @@
 =====
-GIS Brasil
+Django GIS Brasil
 =====
 
 Django GIS Brasil is a Django app with Brazillian geographic information.
