@@ -7,7 +7,7 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='django-gisbrasil',
+    name='django-gis-brasil',
     version='0.1',
     packages=['gisbrasil'],
     include_package_data=True,
@@ -15,7 +15,7 @@ setup(
     zip_safe=False,
     description='Django GIS Brasil is a Django app (GeoDjango) with Brazillian GIS information.',
     long_description=README,
-    url='https://github.com/perone/django-gisbrasil',
+    url='https://github.com/perone/django-gis-brasil',
     author='CodeFish Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)',
     author_email='christian.perone@gmail.com',
     classifiers=[
