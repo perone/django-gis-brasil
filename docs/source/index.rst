@@ -113,6 +113,23 @@ Utilizando informações em rótulos
 
 .. image:: _static/tilemill-poa-bairros-nomes.png
 
+Mapas coropléticos
+========================================================
+
+Você também pode utilizar o GeoJSON gerado utilizando os dados do Django GIS Brasil para
+criar **mapas coropléticos** interativos utilizando o `Leaflet <http://leafletjs.com/>`_
+como nos exemplos abaixo.
+
+Mapa coroplético do Rio Grande do Sul
+--------------------------------------------------------
+
+.. image:: _static/cloro-rs.png
+
+Mapa coroplético do Rio de Janeiro
+--------------------------------------------------------
+
+.. image:: _static/cloro-rj.png
+
 .. _installation:
 
 Instalação
