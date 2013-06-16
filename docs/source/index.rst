@@ -6,7 +6,7 @@ Django GIS Brasil
 
 Release v\ |version|. (:ref:`installation`)
 
-**django-gis-brasil** é uma iniciativa open-source da `CodeFish <http://codefi.sh>`_ (*Christian S. Perone, Leandro Nunes e Gabriel Wainer*)
+**django-gis-brasil** é uma iniciativa open-source da CodeFish (*Christian S. Perone, Leandro Nunes e Gabriel Wainer*)
 para a criação de uma aplicação Django com informações geográficas do território brasileiro. O projeto contém atualmente
 informações de todos municípios brasileiros fornecidos pelo IBGE bem como polígonos geográficos
 prontos para serem importados no seu banco geográfico através do `GeoDjango <https://docs.djangoproject.com/en/dev/ref/contrib/gis/tutorial/>`_. 
