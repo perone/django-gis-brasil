@@ -6,7 +6,7 @@ Django GIS Brasil
 
 Release v\ |version|. (:ref:`installation`)
 
-**django-gis-brasil** é uma iniciativa open-source da CodeFish (*Christian S. Perone, Leandro Nunes e Gabriel Wainer*)
+**django-gis-brasil** é uma iniciativa open-source da CodeFi.sh (*Christian S. Perone, Leandro Nunes e Gabriel Wainer*)
 para a criação de uma aplicação Django com informações geográficas do território brasileiro. O projeto contém atualmente
 informações de todos municípios brasileiros fornecidos pelo IBGE bem como polígonos geográficos
 prontos para serem importados no seu banco geográfico através do `GeoDjango <https://docs.djangoproject.com/en/dev/ref/contrib/gis/tutorial/>`_. 
@@ -17,7 +17,7 @@ todos os dados disponíveis (ver :ref:`screenshots`) abaixo.
 
 .. _screenshots:
 
-Screeshots
+Screenshots
 ========================================================
 
 Listagem de Munícipios do Brasil
@@ -165,7 +165,7 @@ Licença
 
 Mais informações::
 
-    Copyright (c) 2013, CodeFish
+    Copyright (c) 2013, CodeFi.sh
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -177,18 +177,18 @@ Mais informações::
        documentation and/or other materials provided with the distribution.
     3. All advertising materials mentioning features or use of this software
        must display the following acknowledgement:
-       This product includes software developed by CodeFish.
-    4. Neither the name of the CodeFish nor the
+       This product includes software developed by CodeFi.sh.
+    4. Neither the name of the CodeFi.sh nor the
        names of its contributors may be used to endorse or promote products
        derived from this software without specific prior written permission.
 
     * This software contains data public available from other sources, see
       the README files on each data directory for more information.
 
-    THIS SOFTWARE IS PROVIDED BY CODEFISH ''AS IS'' AND ANY
+    THIS SOFTWARE IS PROVIDED BY CODEFI.SH ''AS IS'' AND ANY
     EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
     WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    DISCLAIMED. IN NO EVENT SHALL CODEFISH BE LIABLE FOR ANY
+    DISCLAIMED. IN NO EVENT SHALL CODEFI.SH BE LIABLE FOR ANY
     DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
     (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
     LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -199,12 +199,12 @@ Mais informações::
 Colaboradores
 --------------------------------------------------------
 
-Christian S. Perone (CodeFish) `[twitter] <http://www.twitter.com/tarantulae>`_ 
+Christian S. Perone (CodeFi.sh) `[twitter] <http://www.twitter.com/tarantulae>`_ 
 `[blog] <http://pyevolve.sourceforge.net/wordpress>`_ `[github] <https://github.com/perone>`_.
 
-Gabriel Wainer (CodeFish) `[twitter] <http://www.twitter.com/gabrielcwww>`_ `[github] <https://github.com/gwainer>`_.
+Gabriel Wainer (CodeFi.sh) `[twitter] <http://www.twitter.com/gabrielcwww>`_ `[github] <https://github.com/gwainer>`_.
 
-Leandro Nunes (CodeFish) `[twitter] <http://www.twitter.com/nunesleandro>`_ 
+Leandro Nunes (CodeFi.sh) `[twitter] <http://www.twitter.com/nunesleandro>`_ 
 `[blog] <http://leandron.wordpress.com/>`_ `[github] <https://github.com/leandron>`_.
 
 Página de pesquisa
