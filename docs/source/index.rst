@@ -160,6 +160,20 @@ para criar os modelos no seu banco de dados.
 
 para carregar os dados para o seu banco de dados.
 
+Changelog
+========================================================
+
+Release v.0.2 *(bug fix)*
+--------------------------------------------------------
+
+    - Corrigidos alguns typos na documentação;
+    - Corrigido empacotamento da aplicação;
+
+Release v.0.1 
+--------------------------------------------------------
+
+    - Lançamento do projeto open-source;
+
 Licença
 ========================================================
 
