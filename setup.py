@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='django-gis-brasil',
     version='0.2',
-    packages=['gisbrasil'],
+    packages=['gisbrasil','gisbrasil.management', 'gisbrasil.management.commands'],
     include_package_data=True,
     license='BSD License',
     zip_safe=False,
