@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Django GIS Brasil'
-copyright = u'2013, CodeFish Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)'
+copyright = u'2013, CodeFi.sh Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -196,7 +196,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'DjangoGISBrasil.tex', u'Django GIS Brasil Documentation',
-   u'CodeFish Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)', 'manual'),
+   u'CodeFi.sh Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -226,7 +226,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'djangogisbrasil', u'Django GIS Brasil Documentation',
-     [u'CodeFish Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)'], 1)
+     [u'CodeFi.sh Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -240,7 +240,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'DjangoGISBrasil', u'Django GIS Brasil Documentation',
-   u'CodeFish Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)', 'DjangoGISBrasil', 'One line description of project.',
+   u'CodeFi.sh Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)', 'DjangoGISBrasil', 'One line description of project.',
    'Miscellaneous'),
 ]
 
