@@ -16,7 +16,7 @@ setup(
     description='Django GIS Brasil is a Django app (GeoDjango) with Brazilian GIS information.',
     long_description=README,
     url='https://github.com/perone/django-gis-brasil',
-    author='CodeFish Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)',
+    author='CodeFi.sh Team (Christian S. Perone, Leandro Nunes, Gabriel Wainer)',
     author_email='christian.perone@gmail.com',
     classifiers=[
         'Environment :: Web Environment',
