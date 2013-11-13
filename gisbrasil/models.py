@@ -37,3 +37,53 @@ class PortoAlegreBairro(models.Model):
 
     def __unicode__(self):
         return self.nome_bairro
+
+class PortoAlegreAcidenteTransito(models.Model):
+    dataset_id1 = models.IntegerField()
+    dataset_id2 = models.IntegerField()
+    logradouro1 = models.CharField(max_length=300)
+    logradouro2 = models.CharField(max_length=300)
+    predial = models.IntegerField()
+    local = models.CharField(max_length=100)
+    tipo_acidente = models.CharField(max_length=100)
+    local_via = models.CharField(max_length=300)
+    data_hora = models.DateTimeField()
+    dia_semana = models.CharField(max_length=50)
+    feridos = models.IntegerField()
+    mortes = models.IntegerField()
+    mortes_post = models.IntegerField()
+    fatais = models.IntegerField()
+    auto = models.IntegerField()
+    taxi = models.IntegerField()
+    lotacao = models.IntegerField()
+    onibus_urb = models.IntegerField()
+    onibus_int = models.IntegerField()
+    caminhao = models.IntegerField()
+    moto = models.IntegerField()
+    carroca = models.IntegerField()
+    bicicleta = models.IntegerField()
+    outro = models.IntegerField()
+    tempo = models.CharField(max_length=300)
+    noite_dia = models.CharField(max_length=50)
+    fonte = models.CharField(max_length=100)
+    boletim = models.IntegerField()
+    regiao = models.CharField(max_length=100)
+    dia = models.IntegerField()
+    mes = models.IntegerField()
+    ano = models.IntegerField()
+    fx_hora = models.IntegerField()
+    cont_acid = models.IntegerField()
+    cont_vit = models.IntegerField()
+    ups = models.IntegerField()
+    coordenada = models.PointField()
+
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = u'Porto Alegre - Acidente de Trânsito'
+        verbose_name_plural = u'Porto Alegre - Acidentes de Trânsito'
+
+    def __unicode__(self):
+        return self.logradouro1
+
+

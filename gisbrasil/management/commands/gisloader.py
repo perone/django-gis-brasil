@@ -24,5 +24,10 @@ class Command(BaseCommand):
         gisbrasil.loader.load_portoalegre_bairros(verbosity)
         self.stdout.write(' done !')
 
+        self.stdout.write('Loading Porto Alegre car stats...', ending='')
+        self.stdout.flush()
+        gisbrasil.loader.load_portoalegre_acidente_transito(verbosity)
+        self.stdout.write(' done !')
+
         self.stdout.write('')
 
