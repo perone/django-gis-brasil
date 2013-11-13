@@ -39,11 +39,10 @@ class PortoAlegreBairro(models.Model):
         return self.nome_bairro
 
 class PortoAlegreAcidenteTransito(models.Model):
-    dataset_id1 = models.IntegerField()
-    dataset_id2 = models.IntegerField()
+    dataset_id = models.IntegerField()
     logradouro1 = models.CharField(max_length=300)
     logradouro2 = models.CharField(max_length=300)
-    predial = models.IntegerField()
+    predial = models.CharField(max_length=20)
     local = models.CharField(max_length=100)
     tipo_acidente = models.CharField(max_length=100)
     local_via = models.CharField(max_length=300)
@@ -66,7 +65,7 @@ class PortoAlegreAcidenteTransito(models.Model):
     tempo = models.CharField(max_length=300)
     noite_dia = models.CharField(max_length=50)
     fonte = models.CharField(max_length=100)
-    boletim = models.IntegerField()
+    boletim = models.CharField(max_length=30)
     regiao = models.CharField(max_length=100)
     dia = models.IntegerField()
     mes = models.IntegerField()

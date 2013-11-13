@@ -17,6 +17,9 @@ class PortoAlegreBairroAdmin(admin.GeoModelAdmin):
 
     search_fields = ['nome_bairro']
 
+class PortoAlegreAcidenteTransitoAdmin(admin.GeoModelAdmin):
+	list_display = ['']
 
 admin.site.register(Municipio, MunicipioAdmin)
 admin.site.register(PortoAlegreBairro, PortoAlegreBairroAdmin)
+admin.site.register(PortoAlegreAcidenteTransito, PortoAlegreAcidenteTransitoAdmin)
