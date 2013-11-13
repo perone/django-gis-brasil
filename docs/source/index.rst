@@ -163,6 +163,12 @@ para carregar os dados para o seu banco de dados.
 Changelog
 ========================================================
 
+Release v.0.3 
+--------------------------------------------------------
+
+    - Corrigidos problemas com encoding de shapefiles;
+
+
 Release v.0.2 *(bug fix)*
 --------------------------------------------------------
 
