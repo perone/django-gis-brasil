@@ -3,7 +3,9 @@
 import os
 import csv
 import urllib2
+import json
 from datetime import datetime
+
 
 import progressbar as pbar
 from django.contrib.gis.utils import LayerMapping
@@ -34,7 +36,7 @@ portoalegrebairro_mapping = {
     'nome_bairro': 'NOM_BAIRRO',
     'poly': 'POLYGON',
 }
-
+OPENDATAPOA_REST_SEARCH_BASE_URL = "http://datapoa.com.br/api/action/datastore_search"
 OPENDATAPOA_BASE_URL = "http://www.opendatapoa.com.br/storage/f/"
 OPENDATAPOA_TRANSITO_ACIDENTE = {
     2012: "2013-11-08T12%3A32%3A00.175Z/acidentes-2012.csv",
@@ -51,6 +53,10 @@ OPENDATAPOA_TRANSITO_ACIDENTE = {
     2001: "2013-11-06T17%3A30%3A42.711Z/acidentes-2001.csv",
     2000: "2013-11-06T17%3A26%3A29.293Z/acidentes-2000.csv",
 }
+
+OPENDATAPOA_BIKEPOA_FILTER = "?resource_id=b64586af-cd7c-47c3-9b92-7b99875e1c08"
+OPENDATAPOA_BIKEPOA_QUERY = OPENDATAPOA_REST_SEARCH_BASE_URL + OPENDATAPOA_BIKEPOA_FILTER
+
 
 municipios_shp = os.path.abspath(os.path.join(os.path.dirname(__file__),
     'data/brasil/55mu2500gsd.shp'))
@@ -94,17 +100,35 @@ class RequestProxy(object):
 
 def load_municipios_brasil(verbose=True):
     print
-    print ">> Importanto dados de Municipios do Brasil..."
+    print ">> Importando dados de Municipios do Brasil..."
     lm = LayerMapping(Municipio, municipios_shp, municipios_mapping,
                     transform=True, encoding='latin-1')
     lm.save(strict=True, verbose=verbose)
 
 def load_portoalegre_bairros(verbose=True):
     print
-    print ">> Importanto dados de bairros de Porto Alegre / RS..."
+    print ">> Importando dados de bairros de Porto Alegre / RS..."
     lm = LayerMapping(PortoAlegreBairro, portoalegrebairro_shp, portoalegrebairro_mapping,
                     transform=True, encoding='utf-8')
     lm.save(strict=True, verbose=verbose)
+
+def load_opendatapoa_estacoes_bikepoa():
+    raw_data = urllib2.urlopen(OPENDATAPOA_BIKEPOA_QUERY)
+    print
+    print ">> Importando dados das Estações do BikePoa de Porto Alegre / RS..."
+    json_data = json.load(raw_data)
+    
+    for row in json_data['result']:
+        estacao = PortoAlegreEstacaoBikePoa()
+        estacao.dataset_id = row["_id"]
+        estacao.numero = row["numero"]
+        estacao.nome = row["nome"]
+        estacao.coordenada = latlng_to_wkt(row["LATITUDE"], row["LONGITUDE"])
+        estacao.save()
+    print
+    print ">> Dados do BikePoa de Porto Alegre / RS importados!"
+        
+
 
 def load_opendatapoa_acid_transito_year(year):
     url_storage = OPENDATAPOA_TRANSITO_ACIDENTE[year]

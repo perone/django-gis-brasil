@@ -85,4 +85,20 @@ class PortoAlegreAcidenteTransito(models.Model):
     def __unicode__(self):
         return self.logradouro1
 
+class PortoAlegreEstacaoBikePoa(models.Model):
+    dataset_id = models.IntegerField()
+    numero = models.IntegerField()
+    nome = models.CharField(max_length=100)
+    coordenada = models.PointField()
+
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = u'Porto Alegre Estação BikePoa'
+        verbose_name_plural = u'Porto Alegre Estações BikePoa'
+
+    def __unicode__(self):
+        return u'ID: %s, Nome da estação: %s' % (self.dataset_id, self.nome)
+
+
 
