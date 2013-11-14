@@ -125,6 +125,16 @@ class ParserAcidenteTransito(Parser):
             self.latlng_to_wkt(row["LATITUDE"], row["LONGITUDE"])
         return item
 
+class ParserBikePoa(Parser):
+    def parse(self,row):
+        item = PortoAlegreEstacaoBikePoa()
+        item.dataset_id = row["_id"]
+        item.numero = row["numero"]
+        item.nome = row["nome"]
+        item.coordenada = GEOSGeometry('POINT (%s %s)' % (row["LATITUDE"], \
+            row["LONGITUDE"]))
+        return item;
+
 class CkanDatasetImporter(object):
     datastore_dump = "/datastore/dump/"
 
@@ -165,11 +175,6 @@ class CkanDatasetImporter(object):
             progress.finish()
             request.close()
 
-
-OPENDATAPOA_REST_SEARCH_BASE_URL = "http://datapoa.com.br/api/action/datastore_search"
-OPENDATAPOA_BIKEPOA_FILTER = "?resource_id=b64586af-cd7c-47c3-9b92-7b99875e1c08"
-OPENDATAPOA_BIKEPOA_QUERY = OPENDATAPOA_REST_SEARCH_BASE_URL + OPENDATAPOA_BIKEPOA_FILTER
-
 municipios_shp = os.path.abspath(os.path.join(os.path.dirname(__file__),
     'data/brasil/55mu2500gsd.shp'))
 
@@ -191,21 +196,13 @@ def load_portoalegre_bairros(verbose=True):
     lm.save(strict=True, verbose=verbose)
 
 def load_opendatapoa_estacoes_bikepoa():
-    raw_data = urllib2.urlopen(OPENDATAPOA_BIKEPOA_QUERY)
+    resource_list = ['b64586af-cd7c-47c3-9b92-7b99875e1c08']
     print
     print ">> Importando dados das Estações do BikePoa de Porto Alegre / RS..."
-    json_data = json.load(raw_data)
-    
-    for row in json_data['result']['records']:
-        estacao = PortoAlegreEstacaoBikePoa()
-        estacao.dataset_id = row["_id"]
-        estacao.numero = row["numero"]
-        estacao.nome = row["nome"]
-        estacao.coordenada = GEOSGeometry('POINT (%s %s)' % (row["LATITUDE"], row["LONGITUDE"]))
-        estacao.save()
-    print
-    print ">> Dados do BikePoa de Porto Alegre / RS importados!"
-        
+    importer = CkanDatasetImporter("http://datapoa.com.br",
+        ParserBikePoa(), resource_list)
+    importer.import_dataset()
+
 def load_opendatapoa_acid_transito():
     ckan = ck.CkanClient(base_location="http://datapoa.com.br/api")
     entity = ckan.package_entity_get("acidentes-de-transito")
