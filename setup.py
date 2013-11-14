@@ -5,7 +5,8 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 install_requirements = [
-        'progressbar2>=2.6.0',
+    'progressbar2>=2.6.0',
+    'pytz>=2013.8',
 ]
 
 setup(

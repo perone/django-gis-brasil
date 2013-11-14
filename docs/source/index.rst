@@ -167,6 +167,9 @@ Release v.0.3
 --------------------------------------------------------
 
     - Corrigidos problemas com encoding de shapefiles;
+    - Integração do dataset de Acidentes de Trânsito em
+      Porto Alegre/RS dos anos de 2000 até 2012, disponibilizado
+      pela prefeitura no projeto `[DataPoa] <http://opendatapoa.com.br/>`_ ;
 
 
 Release v.0.2 *(bug fix)*
