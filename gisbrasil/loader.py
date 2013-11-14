@@ -118,12 +118,12 @@ def load_opendatapoa_estacoes_bikepoa():
     print ">> Importando dados das Estações do BikePoa de Porto Alegre / RS..."
     json_data = json.load(raw_data)
     
-    for row in json_data['result']:
+    for row in json_data['result']['records']:
         estacao = PortoAlegreEstacaoBikePoa()
         estacao.dataset_id = row["_id"]
         estacao.numero = row["numero"]
         estacao.nome = row["nome"]
-        estacao.coordenada = latlng_to_wkt(row["LATITUDE"], row["LONGITUDE"])
+        estacao.coordenada = GEOSGeometry('POINT (%s %s)' % (row["LATITUDE"], row["LONGITUDE"]))
         estacao.save()
     print
     print ">> Dados do BikePoa de Porto Alegre / RS importados!"
