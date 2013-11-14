@@ -17,5 +17,6 @@ class Command(BaseCommand):
         gisbrasil.loader.load_portoalegre_bairros(verbosity)
         gisbrasil.loader.load_opendatapoa_acid_transito()
         gisbrasil.loader.load_opendatapoa_estacoes_bikepoa()
+        gisbrasil.loader.load_opendatapoa_ponto_taxi()
         
 
