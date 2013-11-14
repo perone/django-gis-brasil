@@ -141,55 +141,55 @@ def load_opendatapoa_acid_transito_year(year):
     progress = pbar.ProgressBar(widgets=widgets, maxval=100).start()
     input_csv = csv.DictReader(request_proxy, delimiter=";")
     
+    with transaction.commit_on_success():
+        for row in input_csv:
+            val =  request_proxy.progress()
+            progress.update(val)
+           
+            item = PortoAlegreAcidenteTransito()
+            item.dataset_id = row['ID']
+            item.logradouro1 = row['LOG1']
+            item.logradouro2 = row['LOG2']
+            item.predial = row['PREDIAL1']
+            item.local = row['LOCAL']
+            item.tipo_acidente = row['TIPO_ACID']
+            item.local_via = row['LOCAL_VIA']
+            
+            try:
+                item.data_hora = parse_datetime(row['DATA_HORA'])
+            except:
+                print "\nWarning: Registro ignorado, formato de data invalido: '%s'\n" % row['DATA_HORA']
+                continue
 
-    for row in input_csv:
-        val =  request_proxy.progress()
-        progress.update(val)
-       
-        item = PortoAlegreAcidenteTransito()
-        item.dataset_id = row['ID']
-        item.logradouro1 = row['LOG1']
-        item.logradouro2 = row['LOG2']
-        item.predial = row['PREDIAL1']
-        item.local = row['LOCAL']
-        item.tipo_acidente = row['TIPO_ACID']
-        item.local_via = row['LOCAL_VIA']
-        
-        try:
-            item.data_hora = parse_datetime(row['DATA_HORA'])
-        except:
-            print "\nWarning: Registro ignorado, formato de data invalido: '%s'\n" % row['DATA_HORA']
-            continue
-
-        item.dia_semana = row['DIA_SEM']
-        item.feridos = row['FERIDOS']
-        item.mortes = row['MORTES']
-        item.mortes_post = row['MORTE_POST']
-        item.fatais = row['FATAIS']
-        item.auto = row['AUTO']
-        item.taxi = row['TAXI']
-        item.lotacao = row['LOTACAO']
-        item.onibus_urb = row['ONIBUS_URB']
-        item.onibus_int = row['ONIBUS_INT']
-        item.caminhao = row['CAMINHAO']
-        item.moto = row['MOTO']
-        item.carroca = row['CARROCA']
-        item.bicicleta = row['BICICLETA']
-        item.outro = row['OUTRO']
-        item.tempo = row['TEMPO']
-        item.noite_dia = row['NOITE_DIA']
-        item.fonte = row['FONTE']
-        item.boletim = row['BOLETIM']
-        item.regiao = row["REGIAO"]
-        item.dia = row["DIA"]
-        item.mes = row["MES"]
-        item.ano = row["ANO"]
-        item.fx_hora = row["FX_HORA"]
-        item.cont_acid = row["CONT_ACID"]
-        item.cont_vit = row["CONT_VIT"]
-        item.ups = row["UPS"]
-        item.coordenada = latlng_to_wkt(row["LATITUDE"], row["LONGITUDE"])
-        item.save()
+            item.dia_semana = row['DIA_SEM']
+            item.feridos = row['FERIDOS']
+            item.mortes = row['MORTES']
+            item.mortes_post = row['MORTE_POST']
+            item.fatais = row['FATAIS']
+            item.auto = row['AUTO']
+            item.taxi = row['TAXI']
+            item.lotacao = row['LOTACAO']
+            item.onibus_urb = row['ONIBUS_URB']
+            item.onibus_int = row['ONIBUS_INT']
+            item.caminhao = row['CAMINHAO']
+            item.moto = row['MOTO']
+            item.carroca = row['CARROCA']
+            item.bicicleta = row['BICICLETA']
+            item.outro = row['OUTRO']
+            item.tempo = row['TEMPO']
+            item.noite_dia = row['NOITE_DIA']
+            item.fonte = row['FONTE']
+            item.boletim = row['BOLETIM']
+            item.regiao = row["REGIAO"]
+            item.dia = row["DIA"]
+            item.mes = row["MES"]
+            item.ano = row["ANO"]
+            item.fx_hora = row["FX_HORA"]
+            item.cont_acid = row["CONT_ACID"]
+            item.cont_vit = row["CONT_VIT"]
+            item.ups = row["UPS"]
+            item.coordenada = latlng_to_wkt(row["LATITUDE"], row["LONGITUDE"])
+            item.save()
         
     progress.finish()
     request.close()
