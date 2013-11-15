@@ -190,7 +190,6 @@ class Bairros(base.DatasetABC):
         title = u'Dados de Bairros de Porto Alegre / RS'
         source = u'UFRGS'
         command = u'--bairros-portoalegre'
-        command_dest = u'bairros_portoalegre'
 
 class AcidentesTransito(base.DatasetABC):
     def __init__(self):
@@ -210,7 +209,6 @@ class AcidentesTransito(base.DatasetABC):
         title = u'Dados de Acidentes de Trânsito de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--acid-transito-portoalegre'
-        command_dest = u'acid_transito_portoalegre'
 
 class EstacoesBikePoa(base.DatasetABC):
     def __init__(self):
@@ -225,7 +223,6 @@ class EstacoesBikePoa(base.DatasetABC):
         title = u'Dados de Estações BikePoa de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--bikepoa-portoalegre'
-        command_dest = u'bikepoa_portoalegre'
 
 class PontosTaxi(base.DatasetABC):
     def __init__(self):
@@ -240,7 +237,6 @@ class PontosTaxi(base.DatasetABC):
         title = u'Dados de Pontos de Táxi de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--taxi-portoalegre'
-        command_dest = u'taxi_portoalegre'
 
 class ParadasOnibus(base.DatasetABC):
     def __init__(self):
@@ -255,5 +251,4 @@ class ParadasOnibus(base.DatasetABC):
         title = u'Dados de Paradas de Ônibus de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--onibus-portoalegre'
-        command_dest = u'onibus_portoalegre'
 

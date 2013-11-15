@@ -5,7 +5,7 @@ class DatasetABC(object):
     def register(self, cmd):
         opt = make_option(self.Meta.command,
             action='store_true',
-            dest=self.Meta.command_dest,
+            dest=self.Meta.command[2:],
             default=False,
             help=self.Meta.title)
         cmd.option_list = cmd.option_list + (opt,)
@@ -16,8 +16,8 @@ class DatasetABC(object):
     	print '> Dataset carregado com sucesso !'
 
     def check_trigger(self, options):
-    	if self.Meta.command_dest in options:
-    		if options[self.Meta.command_dest]:
+    	if self.Meta.command[2:] in options:
+    		if options[self.Meta.command[2:]]:
     			self.run_import()
     			return True
     	return False

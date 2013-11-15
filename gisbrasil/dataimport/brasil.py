@@ -35,4 +35,3 @@ class MunicipiosBrasil(base.DatasetABC):
         title = u'Dados de Municípios do Brasil'
         source = u'IBGE'
         command = u'--municipios-brasil'
-        command_dest = u'municipios_brasil'
