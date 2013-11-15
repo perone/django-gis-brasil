@@ -73,6 +73,16 @@ class Parser(object):
         parsed_dt = parsed_dt.replace(tzinfo=brasil_tzone)
         return parsed_dt
 
+class ParserPontoTaxi(Parser):
+    def parse(self, row):
+        item = PortoAlegreTaxi()
+        item.idtaxi = row['idtaxi']
+        item.endereco = row['endereco']
+        item.telefone = row['telefone']
+        item.coordenada = self.latlng_to_wkt(row['latitude'],
+            row['longitude'])
+        return item
+
 class ParserAcidenteTransito(Parser):
     def parse(self, row):
         item = PortoAlegreAcidenteTransito()
@@ -208,4 +218,13 @@ def load_opendatapoa_acid_transito():
 
     importer = CkanDatasetImporter("http://datapoa.com.br",
         ParserAcidenteTransito(), resource_list)
+    importer.import_dataset()
+
+def load_opendatapoa_ponto_taxi():
+    resource_list = ['a6bd54de-cff0-4c08-8569-0a54a3f5b1da']
+    print
+    print ">> Importando dados de Pontos de Táxi de Porto Alegre / RS..."
+
+    importer = CkanDatasetImporter("http://datapoa.com.br",
+        ParserPontoTaxi(), resource_list)
     importer.import_dataset()

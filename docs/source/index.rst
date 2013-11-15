@@ -170,9 +170,10 @@ Release v.0.3
     - Integração do dataset de Acidentes de Trânsito em
       Porto Alegre/RS dos anos de 2000 até 2012, disponibilizado
       pela prefeitura no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
-    - Integração do dataset de Estacões do BikePoa, disponibilizado
+    - Integração do dataset de Estacões do BikePoa de Porto ALegre/RS, disponibilizado
       pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
-
+    - Integração do dataset de Pontos de Táxi de Porto Alegre/RS, disponibilizado
+      pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
 
 Release v.0.2 *(bug fix)*
 --------------------------------------------------------

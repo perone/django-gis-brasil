@@ -100,5 +100,18 @@ class PortoAlegreEstacaoBikePoa(models.Model):
     def __unicode__(self):
         return u'ID: %s, Nome da estação: %s' % (self.dataset_id, self.nome)
 
+class PortoAlegreTaxi(models.Model):
+    idtaxi = models.IntegerField()
+    endereco = models.CharField(max_length=300)
+    telefone = models.CharField(max_length=20)
+    coordenada = models.PointField()
 
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = u'Porto Alegre - Ponto de Táxi'
+        verbose_name_plural = u'Porto Alegre - Pontos de Táxi'
+
+    def __unicode__(self):
+        return self.endereco
 

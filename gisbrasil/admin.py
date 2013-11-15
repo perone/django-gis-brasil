@@ -24,6 +24,11 @@ class PortoAlegreAcidenteTransitoAdmin(admin.GeoModelAdmin):
         'data_hora', 'tempo']
     search_fields = ['logradouro1', 'logradouro2', 'dataset_id']
 
+class PortoAlegreTaxiAdmin(admin.GeoModelAdmin):
+    list_display = ['idtaxi', 'endereco', 'telefone']
+    search_fields = ['idtaxi', 'endereco', 'telefone']
+
 admin.site.register(Municipio, MunicipioAdmin)
 admin.site.register(PortoAlegreBairro, PortoAlegreBairroAdmin)
 admin.site.register(PortoAlegreAcidenteTransito, PortoAlegreAcidenteTransitoAdmin)
+admin.site.register(PortoAlegreTaxi, PortoAlegreTaxiAdmin)
