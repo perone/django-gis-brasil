@@ -191,61 +191,60 @@ class Bairros(base.Dataset):
         source = u'UFRGS'
         command = u'--bairros-portoalegre'
 
-class AcidentesTransito(base.Dataset):
+class DataPoaDataset(base.Dataset):
     def __init__(self):
-        self.ckan = ck.CkanClient(base_location="http://datapoa.com.br/api")
+        self.base_url = "http://datapoa.com.br"
+        self.ckan = ck.CkanClient(base_location=self.base_url + "/api")
 
     def import_dataset(self):
-        ckan = ck.CkanClient(base_location="http://datapoa.com.br/api")
-        entity = ckan.package_entity_get("acidentes-de-transito")
-        resource_list = []
-        for resource in entity['resources']:
-            resource_list.append(resource['id'])
-        importer = CkanDatasetImporter("http://datapoa.com.br",
-            ParserAcidenteTransito(), resource_list)
+        importer = CkanDatasetImporter(self.base_url,
+            self.parser, self.resource_list)
         importer.import_dataset()
+
+class AcidentesTransito(DataPoaDataset):
+    def __init__(self):
+        super(AcidentesTransito, self).__init__()
+        self.parser = ParserAcidenteTransito()
+        self.resource_list = []
+
+    def import_dataset(self):
+        entity = self.ckan.package_entity_get("acidentes-de-transito")
+        for resource in entity['resources']:
+            self.resource_list.append(resource['id'])
+        super(AcidentesTransito, self).import_dataset()
 
     class Meta:
         title = u'Dados de Acidentes de Trânsito de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--acid-transito-portoalegre'
 
-class EstacoesBikePoa(base.Dataset):
+class EstacoesBikePoa(DataPoaDataset):
     def __init__(self):
+        super(EstacoesBikePoa, self).__init__()
         self.resource_list = ['b64586af-cd7c-47c3-9b92-7b99875e1c08']
-
-    def import_dataset(self):
-        importer = CkanDatasetImporter("http://datapoa.com.br",
-            ParserBikePoa(), self.resource_list)
-        importer.import_dataset()
+        self.parser = ParserBikePoa()
 
     class Meta:
         title = u'Dados de Estações BikePoa de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--bikepoa-portoalegre'
 
-class PontosTaxi(base.Dataset):
+class PontosTaxi(DataPoaDataset):
     def __init__(self):
+        super(PontosTaxi, self).__init__()
         self.resource_list = ['a6bd54de-cff0-4c08-8569-0a54a3f5b1da']
-
-    def import_dataset(self):
-        importer = CkanDatasetImporter("http://datapoa.com.br",
-            ParserPontoTaxi(), self.resource_list)
-        importer.import_dataset()
+        self.parser = ParserPontoTaxi()
 
     class Meta:
         title = u'Dados de Pontos de Táxi de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--taxi-portoalegre'
 
-class ParadasOnibus(base.Dataset):
+class ParadasOnibus(DataPoaDataset):
     def __init__(self):
+        super(ParadasOnibus, self).__init__()
         self.resource_list = ['8f955225-039e-4dd7-8139-07b635b89e4a']
-
-    def import_dataset(self):
-        importer = CkanDatasetImporter("http://datapoa.com.br",
-            ParserParadas(), self.resource_list)
-        importer.import_dataset()
+        self.parser = ParserParadas()
 
     class Meta:
         title = u'Dados de Paradas de Ônibus de Porto Alegre / RS'
