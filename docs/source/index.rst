@@ -174,6 +174,8 @@ Release v.0.3
       pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
     - Integração do dataset de **Pontos de Táxi** de Porto Alegre/RS, disponibilizado
       pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
+    - Integração do dataset de **Paradas de Ônibus** de Porto Alegre/RS, disponibilizado
+      pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
 
 Release v.0.2 *(bug fix)*
 --------------------------------------------------------
