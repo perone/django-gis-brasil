@@ -13,11 +13,11 @@ class Command(BaseCommand):
         print 'Authors: %s' % gisbrasil.__author__
         print
 
-        #gisbrasil.loader.load_municipios_brasil(verbosity)
-        #gisbrasil.loader.load_portoalegre_bairros(verbosity)
-        #gisbrasil.loader.load_opendatapoa_acid_transito()
-        #gisbrasil.loader.load_opendatapoa_estacoes_bikepoa()
-        #gisbrasil.loader.load_opendatapoa_ponto_taxi()
+        gisbrasil.loader.load_municipios_brasil(verbosity)
+        gisbrasil.loader.load_portoalegre_bairros(verbosity)
+        gisbrasil.loader.load_opendatapoa_acid_transito()
+        gisbrasil.loader.load_opendatapoa_estacoes_bikepoa()
+        gisbrasil.loader.load_opendatapoa_ponto_taxi()
         gisbrasil.loader.load_opendatapoa_paradas()
         
 
