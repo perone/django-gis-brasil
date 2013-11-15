@@ -32,8 +32,14 @@ class PortoAlegreEstacaoBikePoaAdmin(admin.GeoModelAdmin):
     list_display = ['dataset_id', 'numero', 'nome']
     search_fields = ['dataset_id', 'numero', 'nome']
 
+class PortoAlegreParadaAdmin(admin.GeoModelAdmin):
+    list_display = ['idparada', 'codigo', 'terminal']
+    search_fields = ['idparada', 'codigo']
+
 admin.site.register(Municipio, MunicipioAdmin)
 admin.site.register(PortoAlegreBairro, PortoAlegreBairroAdmin)
 admin.site.register(PortoAlegreAcidenteTransito, PortoAlegreAcidenteTransitoAdmin)
 admin.site.register(PortoAlegreTaxi, PortoAlegreTaxiAdmin)
 admin.site.register(PortoAlegreEstacaoBikePoa, PortoAlegreEstacaoBikePoaAdmin)
+admin.site.register(PortoAlegreParada, PortoAlegreParadaAdmin)
+

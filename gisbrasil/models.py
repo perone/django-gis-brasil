@@ -115,3 +115,24 @@ class PortoAlegreTaxi(models.Model):
     def __unicode__(self):
         return self.endereco
 
+class PortoAlegreParada(models.Model):
+    TERMINAL_CHOICES = (
+        ('S', 'Sim'),
+        ('N', 'Não'),
+    )
+
+    idparada = models.IntegerField()
+    codigo = models.IntegerField()
+    coordenada = models.PointField()
+    terminal = models.CharField(max_length=2, choices=TERMINAL_CHOICES)
+
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = u'Porto Alegre - Parada de Ônibus'
+        verbose_name_plural = u'Porto Alegre - Paradas de Ônibus'
+
+    def __unicode__(self):
+        return self.codigo
+
+

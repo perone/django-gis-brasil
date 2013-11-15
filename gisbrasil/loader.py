@@ -81,6 +81,16 @@ class ParserPontoTaxi(Parser):
             row['longitude'])
         return item
 
+class ParserParadas(Parser):
+    def parse(self, row):
+        item = PortoAlegreParada()
+        item.idparada = row['idparada']
+        item.codigo = row['codigo']
+        item.coordenada = self.latlng_to_wkt(row['latitude'],
+            row['longitude'])
+        item.terminal = row['terminal']
+        return item
+
 class ParserAcidenteTransito(Parser):
     def parse(self, row):
         item = PortoAlegreAcidenteTransito()
@@ -223,3 +233,13 @@ def load_opendatapoa_ponto_taxi():
     importer = CkanDatasetImporter("http://datapoa.com.br",
         ParserPontoTaxi(), resource_list)
     importer.import_dataset()
+
+def load_opendatapoa_paradas():
+    resource_list = ['8f955225-039e-4dd7-8139-07b635b89e4a']
+    print
+    print ">> Importando dados de Paradas de Ônibus de Porto Alegre / RS..."
+
+    importer = CkanDatasetImporter("http://datapoa.com.br",
+        ParserParadas(), resource_list)
+    importer.import_dataset()
+
