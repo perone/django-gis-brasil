@@ -62,9 +62,7 @@ class RequestProxy(object):
 
 class Parser(object):
     def latlng_to_wkt(self, lat, lng):
-        lat_s = lat.replace(",", ".")
-        lng_s = lng.replace(",", ".")
-        coord = GEOSGeometry('POINT (%s %s)' % (lng_s, lat_s))
+        coord = GEOSGeometry('POINT (%s %s)' % (lng, lat))
         return coord
 
     def parse_datetime(self, dttime):
@@ -131,8 +129,8 @@ class ParserBikePoa(Parser):
         item.dataset_id = row["_id"]
         item.numero = row["numero"]
         item.nome = row["nome"]
-        item.coordenada = GEOSGeometry('POINT (%s %s)' % (row["LATITUDE"], \
-            row["LONGITUDE"]))
+        item.coordenada = self.latlng_to_wkt(row["LATITUDE"],
+            row["LONGITUDE"])
         return item;
 
 class CkanDatasetImporter(object):
