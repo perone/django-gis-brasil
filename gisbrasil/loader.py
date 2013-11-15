@@ -101,7 +101,12 @@ class ParserAcidenteTransito(Parser):
         item.local = row['LOCAL']
         item.tipo_acidente = row['TIPO_ACID']
         item.local_via = row['LOCAL_VIA']
-        item.data_hora = self.parse_datetime(row['DATA_HORA'])
+        try:
+            item.data_hora = self.parse_datetime(row['DATA_HORA'])
+        except:
+            print 'Registro ignorado, formato de data inválido [%s]' % \
+                row['DATA_HORA']
+            return None
         item.dia_semana = row['DIA_SEM']
         item.feridos = row['FERIDOS']
         item.mortes = row['MORTES']
