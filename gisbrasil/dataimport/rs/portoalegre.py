@@ -1,3 +1,5 @@
+# happy fish coding: utf-8
+
 # happy fish-coding: utf-8
 
 import os
@@ -8,35 +10,13 @@ from datetime import datetime
 
 import ckanclient as ck
 import dateutil.parser
-
+from pytz import timezone
 import progressbar as pbar
-from django.contrib.gis.utils import LayerMapping
 from django.contrib.gis.geos import GEOSGeometry
-from django.contrib.gis.geos import Point
 from django.db import transaction
 
-from pytz import timezone
-from models import *
-
-municipios_mapping = {
-    'geocode': 'GEOCODIG_M',
-    'uf': 'UF',
-    'sigla': 'Sigla',
-    'nome_municipio': 'Nome_Munic',
-    'regiao': 'Regiao',
-    'mesorregiao': 'Mesoregia',
-    'nome_mesorregiao': 'Nome_Meso',
-    'microregiao': 'Microrregi',
-    'nome_microrregiao': 'Nome_Micro',
-    'multipoly' : 'MULTIPOLYGON',
-}
-
-portoalegrebairro_mapping = {
-    'codigo_bairro': 'COD_BAIRRO',
-    'oficial': 'OFICIAL',
-    'nome_bairro': 'NOM_BAIRRO',
-    'poly': 'POLYGON',
-}
+from gisbrasil.dataimport import base
+from gisbrasil.models import *
 
 class RequestProxy(object):
     def __init__(self, request):
@@ -146,7 +126,7 @@ class ParserBikePoa(Parser):
         item.nome = row["nome"]
         item.coordenada = self.latlng_to_wkt(row["LATITUDE"],
             row["LONGITUDE"])
-        return item;
+        return item
 
 class CkanDatasetImporter(object):
     datastore_dump = "/datastore/dump/"
@@ -161,14 +141,14 @@ class CkanDatasetImporter(object):
 
     def import_dataset(self):
         for index, resource_id in enumerate(self.resource_list):
-            print '>>> Importando dataset %d de %d...' % \
+            print '>> Importando dataset %d de %d...' % \
                 (index+1, len(self.resource_list))
 
             url = self.base_url + CkanDatasetImporter.datastore_dump
             request = urllib2.urlopen(url + resource_id)
             request_proxy = RequestProxy(request)
 
-            widgets = ['>>>> Progresso: ', pbar.Percentage(), ' ', pbar.Bar(marker="#"),
+            widgets = ['>>> Progresso: ', pbar.Percentage(), ' ', pbar.Bar(marker="#"),
                 ' ', pbar.ETA(), ' Velocidade: ', pbar.FileTransferSpeed()]
             progress = pbar.ProgressBar(widgets=widgets, maxval=len(request_proxy))
             progress.start()
@@ -188,63 +168,92 @@ class CkanDatasetImporter(object):
             progress.finish()
             request.close()
 
-municipios_shp = os.path.abspath(os.path.join(os.path.dirname(__file__),
-    'data/brasil/55mu2500gsd.shp'))
+class Bairros(base.DatasetABC):
+    def __init__(self):
+        self.shp_filename = os.path.abspath(os.path.join(
+            os.path.dirname(__file__),
+            '../../data/rs/portoalegre/bairros_utm22_sad69.shp'))
 
-portoalegrebairro_shp = os.path.abspath(os.path.join(os.path.dirname(__file__),
-    'data/rs/portoalegre/bairros_utm22_sad69.shp'))
+        self.mapping = {
+            'codigo_bairro': 'COD_BAIRRO',
+            'oficial': 'OFICIAL',
+            'nome_bairro': 'NOM_BAIRRO',
+            'poly': 'POLYGON',
+        }
 
-def load_municipios_brasil(verbose=True):
-    print
-    print ">> Importando dados de Municipios do Brasil..."
-    lm = LayerMapping(Municipio, municipios_shp, municipios_mapping,
-                    transform=True, encoding='latin-1')
-    lm.save(strict=True, verbose=verbose)
+    def import_dataset(self):
+        lm = LayerMapping(PortoAlegreBairro, self.shp_filename,
+            self.mapping, transform=True, encoding='utf-8')
+        lm.save(strict=True, verbose=False)
 
-def load_portoalegre_bairros(verbose=True):
-    print
-    print ">> Importando dados de bairros de Porto Alegre / RS..."
-    lm = LayerMapping(PortoAlegreBairro, portoalegrebairro_shp, portoalegrebairro_mapping,
-                    transform=True, encoding='utf-8')
-    lm.save(strict=True, verbose=verbose)
+    class Meta:
+        title = u'Dados de Bairros de Porto Alegre / RS'
+        source = u'UFRGS'
+        command = u'--bairros-portoalegre'
+        command_dest = u'bairros_portoalegre'
 
-def load_opendatapoa_estacoes_bikepoa():
-    resource_list = ['b64586af-cd7c-47c3-9b92-7b99875e1c08']
-    print
-    print ">> Importando dados das Estações do BikePoa de Porto Alegre / RS..."
-    importer = CkanDatasetImporter("http://datapoa.com.br",
-        ParserBikePoa(), resource_list)
-    importer.import_dataset()
+class AcidentesTransito(base.DatasetABC):
+    def __init__(self):
+        self.ckan = ck.CkanClient(base_location="http://datapoa.com.br/api")
 
-def load_opendatapoa_acid_transito():
-    ckan = ck.CkanClient(base_location="http://datapoa.com.br/api")
-    entity = ckan.package_entity_get("acidentes-de-transito")
-    resource_list = []
-    for resource in entity['resources']:
-        resource_list.append(resource['id'])
+    def import_dataset(self):
+        ckan = ck.CkanClient(base_location="http://datapoa.com.br/api")
+        entity = ckan.package_entity_get("acidentes-de-transito")
+        resource_list = []
+        for resource in entity['resources']:
+            resource_list.append(resource['id'])
+        importer = CkanDatasetImporter("http://datapoa.com.br",
+            ParserAcidenteTransito(), resource_list)
+        importer.import_dataset()
 
-    print
-    print ">> Importando dados de Acidentes de Transito de Porto Alegre / RS..."
+    class Meta:
+        title = u'Dados de Acidentes de Trânsito de Porto Alegre / RS'
+        source = u'DataPoa'
+        command = u'--acid-transito-portoalegre'
+        command_dest = u'acid_transito_portoalegre'
 
-    importer = CkanDatasetImporter("http://datapoa.com.br",
-        ParserAcidenteTransito(), resource_list)
-    importer.import_dataset()
+class EstacoesBikePoa(base.DatasetABC):
+    def __init__(self):
+        self.resource_list = ['b64586af-cd7c-47c3-9b92-7b99875e1c08']
 
-def load_opendatapoa_ponto_taxi():
-    resource_list = ['a6bd54de-cff0-4c08-8569-0a54a3f5b1da']
-    print
-    print ">> Importando dados de Pontos de Táxi de Porto Alegre / RS..."
+    def import_dataset(self):
+        importer = CkanDatasetImporter("http://datapoa.com.br",
+            ParserBikePoa(), self.resource_list)
+        importer.import_dataset()
 
-    importer = CkanDatasetImporter("http://datapoa.com.br",
-        ParserPontoTaxi(), resource_list)
-    importer.import_dataset()
+    class Meta:
+        title = u'Dados de Estações BikePoa de Porto Alegre / RS'
+        source = u'DataPoa'
+        command = u'--bikepoa-portoalegre'
+        command_dest = u'bikepoa_portoalegre'
 
-def load_opendatapoa_paradas():
-    resource_list = ['8f955225-039e-4dd7-8139-07b635b89e4a']
-    print
-    print ">> Importando dados de Paradas de Ônibus de Porto Alegre / RS..."
+class PontosTaxi(base.DatasetABC):
+    def __init__(self):
+        self.resource_list = ['a6bd54de-cff0-4c08-8569-0a54a3f5b1da']
 
-    importer = CkanDatasetImporter("http://datapoa.com.br",
-        ParserParadas(), resource_list)
-    importer.import_dataset()
+    def import_dataset(self):
+        importer = CkanDatasetImporter("http://datapoa.com.br",
+            ParserPontoTaxi(), self.resource_list)
+        importer.import_dataset()
+
+    class Meta:
+        title = u'Dados de Pontos de Táxi de Porto Alegre / RS'
+        source = u'DataPoa'
+        command = u'--taxi-portoalegre'
+        command_dest = u'taxi_portoalegre'
+
+class ParadasOnibus(base.DatasetABC):
+    def __init__(self):
+        self.resource_list = ['8f955225-039e-4dd7-8139-07b635b89e4a']
+
+    def import_dataset(self):
+        importer = CkanDatasetImporter("http://datapoa.com.br",
+            ParserParadas(), self.resource_list)
+        importer.import_dataset()
+
+    class Meta:
+        title = u'Dados de Paradas de Ônibus de Porto Alegre / RS'
+        source = u'DataPoa'
+        command = u'--onibus-portoalegre'
+        command_dest = u'onibus_portoalegre'
 

@@ -3,21 +3,37 @@
 from django.core.management.base import BaseCommand, CommandError
 import gisbrasil
 
+from gisbrasil.dataimport import base
+from gisbrasil.dataimport import brasil
+from gisbrasil.dataimport import rs
+
 class Command(BaseCommand):
-    help = 'Load the GIS data from shapefiles to the database.'
+    help = 'Load the GIS data from the datasets into the database.'
+
+    def __init__(self, *args, **kwargs):
+        self.datasets = [
+            brasil.MunicipiosBrasil(),
+            rs.portoalegre.Bairros(),
+            rs.portoalegre.AcidentesTransito(),
+            rs.portoalegre.EstacoesBikePoa(),
+            rs.portoalegre.PontosTaxi(),
+            rs.portoalegre.ParadasOnibus(),
+        ]
+        for dataset in self.datasets:
+            dataset.register(self)
+        super(Command, self).__init__(*args, **kwargs)
 
     def handle(self, *args, **options):
-        verbosity = int(options['verbosity']) > 1 
-                
         print 'django-gisbrasil v.%s' % gisbrasil.__version__
         print 'Authors: %s' % gisbrasil.__author__
         print
+ 
+        execution_flags = []        
+        for dataset in self.datasets:
+            execution_flags.append(dataset.check_trigger(options))
 
-        gisbrasil.loader.load_municipios_brasil(verbosity)
-        gisbrasil.loader.load_portoalegre_bairros(verbosity)
-        gisbrasil.loader.load_opendatapoa_acid_transito()
-        gisbrasil.loader.load_opendatapoa_estacoes_bikepoa()
-        gisbrasil.loader.load_opendatapoa_ponto_taxi()
-        gisbrasil.loader.load_opendatapoa_paradas()
-        
+        if not any(execution_flags):
+            for dataset in self.datasets:
+                dataset.run_import()
+                print
 
