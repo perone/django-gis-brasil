@@ -7,7 +7,7 @@ from django.contrib.gis.utils import LayerMapping
 from gisbrasil.dataimport import base
 from gisbrasil.models import *
 
-class MunicipiosBrasil(base.DatasetABC):
+class MunicipiosBrasil(base.Dataset):
     def __init__(self):
         self.shp_filename = os.path.abspath(
             os.path.join(os.path.dirname(__file__),

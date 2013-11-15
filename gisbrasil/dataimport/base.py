@@ -1,7 +1,7 @@
 # happy fish-coding: utf-8
 from optparse import make_option
 
-class DatasetABC(object):
+class Dataset(object):
     def register(self, cmd):
         opt = make_option(self.Meta.command,
             action='store_true',

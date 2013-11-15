@@ -168,7 +168,7 @@ class CkanDatasetImporter(object):
             progress.finish()
             request.close()
 
-class Bairros(base.DatasetABC):
+class Bairros(base.Dataset):
     def __init__(self):
         self.shp_filename = os.path.abspath(os.path.join(
             os.path.dirname(__file__),
@@ -191,7 +191,7 @@ class Bairros(base.DatasetABC):
         source = u'UFRGS'
         command = u'--bairros-portoalegre'
 
-class AcidentesTransito(base.DatasetABC):
+class AcidentesTransito(base.Dataset):
     def __init__(self):
         self.ckan = ck.CkanClient(base_location="http://datapoa.com.br/api")
 
@@ -210,7 +210,7 @@ class AcidentesTransito(base.DatasetABC):
         source = u'DataPoa'
         command = u'--acid-transito-portoalegre'
 
-class EstacoesBikePoa(base.DatasetABC):
+class EstacoesBikePoa(base.Dataset):
     def __init__(self):
         self.resource_list = ['b64586af-cd7c-47c3-9b92-7b99875e1c08']
 
@@ -224,7 +224,7 @@ class EstacoesBikePoa(base.DatasetABC):
         source = u'DataPoa'
         command = u'--bikepoa-portoalegre'
 
-class PontosTaxi(base.DatasetABC):
+class PontosTaxi(base.Dataset):
     def __init__(self):
         self.resource_list = ['a6bd54de-cff0-4c08-8569-0a54a3f5b1da']
 
@@ -238,7 +238,7 @@ class PontosTaxi(base.DatasetABC):
         source = u'DataPoa'
         command = u'--taxi-portoalegre'
 
-class ParadasOnibus(base.DatasetABC):
+class ParadasOnibus(base.Dataset):
     def __init__(self):
         self.resource_list = ['8f955225-039e-4dd7-8139-07b635b89e4a']
 
