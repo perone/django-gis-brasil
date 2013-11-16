@@ -117,8 +117,7 @@ Dados dos Acidentes em Porto Alegre / RS
 ------------------------------------------------------------------------------
 
 A imagem abaixo mostra o plot dos acidentes de trânsito em Porto Alegre / RS durante os anos
-de 2000 até 2012. Quanto maior o marcador e mais intensa a cor do marcador é onde houveram
-mais feridos no acidente.
+de 2000 até 2012. Quanto maior o marcador é onde houveram mais feridos no acidente.
 
 .. image:: _static/transito_poa.png
 
