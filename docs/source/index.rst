@@ -234,7 +234,6 @@ do `gisloader` como no exemplo abaixo::
 
 Para importar por exemplo apenas o conjunto de dados de **Paradas de Ônibus** em Porto Alegre/RS,
 basta utilizar o respectivo parâmetro para realizar a importação como no exemplo abaixo::
-
   
   python manage.py gisloader --onibus-portoalegre
 
@@ -248,6 +247,7 @@ Release v.0.3
     - *Refactoring* do sistema de importação de datasets;
     - Implementação da importação seletiva (agora o usuário pode escolher
       quais datasets quer importar);
+    - Melhorias na documentação;
     - Integração dos mapas de eixos (ruas, avenidas, etc) de Porto Alegre / RS;
     - Integração do dataset de **Acidentes de Trânsito** em
       Porto Alegre/RS dos anos de 2000 até 2012, disponibilizado
