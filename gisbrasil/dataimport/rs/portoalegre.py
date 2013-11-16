@@ -11,6 +11,7 @@ import ckanclient as ck
 import dateutil.parser
 from pytz import timezone
 import progressbar as pbar
+from django.contrib.gis.utils import LayerMapping
 from django.contrib.gis.geos import GEOSGeometry
 from django.db import transaction
 
