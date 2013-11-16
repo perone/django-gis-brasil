@@ -5,7 +5,6 @@
 import os
 import csv
 import urllib2
-import json
 from datetime import datetime
 
 import ckanclient as ck
