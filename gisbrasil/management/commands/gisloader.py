@@ -8,7 +8,7 @@ from gisbrasil.dataimport import brasil
 from gisbrasil.dataimport import rs
 
 class Command(BaseCommand):
-    help = 'Load the GIS data from the datasets into the database.'
+    help = 'Carrega os conjuntos de dados disponíveis para o banco de dados.'
 
     def __init__(self, *args, **kwargs):
         self.datasets = [
@@ -26,7 +26,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         print 'django-gisbrasil v.%s' % gisbrasil.__version__
-        print 'Authors: %s' % gisbrasil.__author__
+        print 'Autores: %s' % gisbrasil.__author__
         print
  
         execution_flags = []        

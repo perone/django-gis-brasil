@@ -161,6 +161,8 @@ Mapa coroplético do Rio de Janeiro
 Instalação
 ========================================================
 
+.. .. warning:: test
+
 Siga as instruções abaixo para instalar esta aplicação no seu projeto Django.
 
 1. Instale o django-gis-brasil através do `pip` ou `easy_install`::
@@ -184,7 +186,57 @@ para criar os modelos no seu banco de dados.
 
     python manage.py gisloader
 
-para carregar os dados para o seu banco de dados.
+Note que ao executar o `gisloader` sem parâmetros o Django GIS Brasil irá importar todos datasets,
+isto pode levar algum tempo e irá utilizar a sua rede para fazer o download dos datasets quando
+necessário. Para fazer a importação seletiva, ou seja, importar apenas dados específicos utilize
+a importação seletiva como mostrado abaixo no próximo tópico.
+
+.. note:: É natural que a importação dos conjuntos de dados demore devido a quantidade de registros
+          que são inseridos no Banco de Dados do Django.
+
+Importação seletiva de datasets
+--------------------------------------------------------
+
+Para importar apenas alguns conjuntos de dados, passe por parâmetro para o gisloader o nome
+do *dataset* que você deseja importar. Para listar os *datasets* disponíveis, execute o *help*
+do `gisloader` como no exemplo abaixo::
+
+    python manage.py gisloader --help
+
+    Usage: manage.py gisloader [options] 
+    Load the GIS data from the datasets into the database.
+
+    Options:
+      -v VERBOSITY, --verbosity=VERBOSITY
+                            Verbosity level; 0=minimal output, 1=normal output,
+                            2=verbose output, 3=very verbose output
+      --settings=SETTINGS   The Python path to a settings module, e.g.
+                            "myproject.settings.main". If this isn't provided, the
+                            DJANGO_SETTINGS_MODULE environment variable will be
+                            used.
+      --pythonpath=PYTHONPATH
+                            A directory to add to the Python path, e.g.
+                            "/home/djangoprojects/myproject".
+      --traceback           Raise on exception
+      --municipios-brasil   Dados de Municípios do Brasil
+      --bairros-portoalegre
+                            Dados de Bairros de Porto Alegre / RS
+      --acid-transito-portoalegre
+                            Dados de Acidentes de Trânsito de Porto Alegre / RS
+      --bikepoa-portoalegre
+                            Dados de Estações BikePoa de Porto Alegre / RS
+      --taxi-portoalegre    Dados de Pontos de Táxi de Porto Alegre / RS
+      --onibus-portoalegre  Dados de Paradas de Ônibus de Porto Alegre / RS
+      --eixos-portoalegre   Dados de Eixos (ruas, avenidas, etc) de Porto Alegre /
+                            RS
+      --version             show program's version number and exit
+      -h, --help            show this help message and exit
+
+Para importar por exemplo apenas o conjunto de dados de **Paradas de Ônibus** em Porto Alegre/RS,
+basta utilizar o respectivo parâmetro para realizar a importação como no exemplo abaixo::
+
+  
+  python manage.py gisloader --onibus-portoalegre
 
 Changelog
 ========================================================
