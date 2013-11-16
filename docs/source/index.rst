@@ -95,8 +95,8 @@ Criação de mapas com TileMill
 ========================================================
 
 Você pode utilizar o `TileMill <http://www.mapbox.com/tilemill/>`_ para conectar no seu banco
-geográfico e gerar mapas com estilos customizados utilizando os dados do Django GIS Brasil.
-Veja exemplos abaixo.
+geográfico e gerar mapas com estilos customizados utilizando os dados do Django GIS Brasil,
+isto tudo utilizando apenas software open-source. Veja exemplos abaixo.
 
 Todos Municípios do Brasil
 ------------------------------------------------------------------------------
@@ -120,6 +120,24 @@ A imagem abaixo mostra o plot dos acidentes de trânsito em Porto Alegre / RS du
 de 2000 até 2012. Quanto maior o marcador é onde houveram mais feridos no acidente.
 
 .. image:: _static/transito_poa.png
+
+Mapa com estilo noturno para Porto Alegre / RS
+------------------------------------------------------------------------------
+
+Este é um mapa noturno da cidade de Porto Alegre / RS, customizado utilizando
+o TileMill com os dados do Django GIS Brasil utilizando somente softwares open-source.
+
+.. image:: _static/night_map_poa.png
+
+
+Mapa ao estilo Google Maps com texturas
+------------------------------------------------------------------------------
+
+Este é um mapa da cidade de Porto Alegre / RS, customizado para imitar o estilo
+de cores do Google Maps e mais algumas texturas extras, utilziando softwares open-source.
+
+.. image:: _static/googlelike_poa.png
+
 
 Mapas coropléticos
 ========================================================
@@ -178,6 +196,7 @@ Release v.0.3
     - *Refactoring* do sistema de importação de datasets;
     - Implementação da importação seletiva (agora o usuário pode escolher
       quais datasets quer importar);
+    - Integração dos mapas de eixos (ruas, avenidas, etc) de Porto Alegre / RS;
     - Integração do dataset de **Acidentes de Trânsito** em
       Porto Alegre/RS dos anos de 2000 até 2012, disponibilizado
       pela prefeitura no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;

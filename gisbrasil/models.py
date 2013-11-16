@@ -38,6 +38,28 @@ class PortoAlegreBairro(models.Model):
     def __unicode__(self):
         return self.nome_bairro
 
+class PortoAlegreEixo(models.Model):
+    nome = models.CharField(max_length=50)
+    abreviatura = models.CharField(max_length=30)
+    cep = models.IntegerField('CEP')
+    grupo_cep = models.IntegerField('Grupo CEP')
+    preposicao = models.CharField(max_length=10)
+    categoria = models.CharField(max_length=20)
+    smf_i_i = models.IntegerField()
+    smf_i_f = models.IntegerField()
+    smf_p_i = models.IntegerField()
+    smf_p_f = models.IntegerField()
+
+    geom = models.MultiLineStringField()
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = u'Porto Alegre - Eixo'
+        verbose_name_plural = u'Porto Alegre - Eixos'
+
+    def __unicode__(self):
+        return self.nome
+
 class PortoAlegreAcidenteTransito(models.Model):
     dataset_id = models.IntegerField()
     logradouro1 = models.CharField(max_length=300)

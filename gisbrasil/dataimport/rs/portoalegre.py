@@ -191,6 +191,36 @@ class Bairros(base.Dataset):
         source = u'UFRGS'
         command = u'--bairros-portoalegre'
 
+class Eixos(base.Dataset):
+    def __init__(self):
+        self.shp_filename = os.path.abspath(os.path.join(
+            os.path.dirname(__file__),
+            '../../data/rs/portoalegre/eixos_ruas_utm22_sad69.shp'))
+
+        self.mapping = {
+            'smf_i_i' : 'SMF_I_I',
+            'smf_i_f' : 'SMF_I_F',
+            'smf_p_i' : 'SMF_P_I',
+            'smf_p_f' : 'SMF_P_F',
+            'categoria' : 'CATEGORIA',
+            'preposicao' : 'PREPOSICAO',
+            'nome' : 'NOME',
+            'abreviatura' : 'ABREVIAT',
+            'cep' : 'CEP',
+            'grupo_cep' : 'GRUPO_CEP',
+            'geom' : 'MULTILINESTRING',
+        }
+
+    def import_dataset(self):
+        lm = LayerMapping(PortoAlegreEixo, self.shp_filename,
+            self.mapping, transform=True, encoding='utf-8')
+        lm.save(strict=True, verbose=False)
+
+    class Meta:
+        title = u'Dados de Eixos (ruas, avenidas, etc) de Porto Alegre / RS'
+        source = u'UFRGS'
+        command = u'--eixos-portoalegre'
+
 class DataPoaDataset(base.Dataset):
     def __init__(self):
         self.base_url = "http://datapoa.com.br"
