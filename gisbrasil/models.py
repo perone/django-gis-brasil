@@ -45,10 +45,10 @@ class PortoAlegreEixo(models.Model):
     grupo_cep = models.IntegerField('Grupo CEP')
     preposicao = models.CharField(max_length=10)
     categoria = models.CharField(max_length=20)
-    smf_i_i = models.IntegerField()
-    smf_i_f = models.IntegerField()
-    smf_p_i = models.IntegerField()
-    smf_p_f = models.IntegerField()
+    smf_i_i = models.IntegerField('Nro Impar Inicial')
+    smf_i_f = models.IntegerField('Nro Impar Final')
+    smf_p_i = models.IntegerField('Nro Par Inicial')
+    smf_p_f = models.IntegerField('Nro Par Final')
 
     geom = models.MultiLineStringField()
     objects = models.GeoManager()
@@ -62,14 +62,14 @@ class PortoAlegreEixo(models.Model):
 
 class PortoAlegreAcidenteTransito(models.Model):
     dataset_id = models.IntegerField()
-    logradouro1 = models.CharField(max_length=300)
-    logradouro2 = models.CharField(max_length=300)
+    logradouro1 = models.CharField('Logradouro 1', max_length=300)
+    logradouro2 = models.CharField('Logradouro 2', max_length=300)
     predial = models.CharField(max_length=20)
     local = models.CharField(max_length=100)
-    tipo_acidente = models.CharField(max_length=100)
+    tipo_acidente = models.CharField('Tipo de Acidente', max_length=100)
     local_via = models.CharField(max_length=300)
     data_hora = models.DateTimeField()
-    dia_semana = models.CharField(max_length=50)
+    dia_semana = models.CharField('Dia da Semana', max_length=50)
     feridos = models.IntegerField()
     mortes = models.IntegerField()
     mortes_post = models.IntegerField()
@@ -85,14 +85,14 @@ class PortoAlegreAcidenteTransito(models.Model):
     bicicleta = models.IntegerField()
     outro = models.IntegerField()
     tempo = models.CharField(max_length=300)
-    noite_dia = models.CharField(max_length=50)
+    noite_dia = models.CharField('Noite ou Dia', max_length=50)
     fonte = models.CharField(max_length=100)
     boletim = models.CharField(max_length=30)
     regiao = models.CharField(max_length=100)
     dia = models.IntegerField()
     mes = models.IntegerField()
     ano = models.IntegerField()
-    fx_hora = models.IntegerField()
+    fx_hora = models.IntegerField('Faixa de Horário')
     cont_acid = models.IntegerField()
     cont_vit = models.IntegerField()
     ups = models.IntegerField()
@@ -108,7 +108,7 @@ class PortoAlegreAcidenteTransito(models.Model):
         return self.logradouro1
 
 class PortoAlegreEstacaoBikePoa(models.Model):
-    dataset_id = models.IntegerField()
+    dataset_id = models.IntegerField('Dataset ID')
     numero = models.IntegerField()
     nome = models.CharField(max_length=100)
     coordenada = models.PointField()
@@ -123,7 +123,7 @@ class PortoAlegreEstacaoBikePoa(models.Model):
         return u'ID: %s, Nome da estação: %s' % (self.dataset_id, self.nome)
 
 class PortoAlegreTaxi(models.Model):
-    idtaxi = models.IntegerField()
+    idtaxi = models.IntegerField(u'ID do Táxi')
     endereco = models.CharField(max_length=300)
     telefone = models.CharField(max_length=20)
     coordenada = models.PointField()
@@ -143,8 +143,8 @@ class PortoAlegreParada(models.Model):
         ('N', 'Não'),
     )
 
-    idparada = models.IntegerField()
-    codigo = models.IntegerField()
+    idparada = models.IntegerField('ID da Parada')
+    codigo = models.IntegerField(u'Código')
     coordenada = models.PointField()
     terminal = models.CharField(max_length=2, choices=TERMINAL_CHOICES)
 

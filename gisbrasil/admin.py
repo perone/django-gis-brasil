@@ -32,10 +32,19 @@ class PortoAlegreParadaAdmin(admin.GeoModelAdmin):
     list_display = ['idparada', 'codigo', 'terminal']
     search_fields = ['idparada', 'codigo']
 
+class PortoAlegreEixoAdmin(admin.GeoModelAdmin):
+    list_display = ['nome', 'abreviatura', 'cep', 'grupo_cep',
+        'preposicao', 'categoria', 'smf_i_i', 'smf_i_f', 'smf_p_i',
+        'smf_p_f']
+    search_fields = ['nome', 'abreviatura', 'cep']
+    list_filter = ['categoria']
+
 admin.site.register(Municipio, MunicipioAdmin)
 admin.site.register(PortoAlegreBairro, PortoAlegreBairroAdmin)
 admin.site.register(PortoAlegreAcidenteTransito, PortoAlegreAcidenteTransitoAdmin)
 admin.site.register(PortoAlegreTaxi, PortoAlegreTaxiAdmin)
 admin.site.register(PortoAlegreEstacaoBikePoa, PortoAlegreEstacaoBikePoaAdmin)
 admin.site.register(PortoAlegreParada, PortoAlegreParadaAdmin)
+admin.site.register(PortoAlegreEixo, PortoAlegreEixoAdmin)
+
 
