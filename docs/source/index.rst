@@ -175,6 +175,9 @@ Release v.0.3
 --------------------------------------------------------
 
     - Corrigidos problemas com encoding de shapefiles;
+    - *Refactoring* do sistema de importação de datasets;
+    - Implementação da importação seletiva (agora o usuário pode escolher
+      quais datasets quer importar);
     - Integração do dataset de **Acidentes de Trânsito** em
       Porto Alegre/RS dos anos de 2000 até 2012, disponibilizado
       pela prefeitura no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
