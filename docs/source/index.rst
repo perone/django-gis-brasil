@@ -138,7 +138,7 @@ de cores do Google Maps e mais algumas texturas extras, utilziando softwares ope
 
 .. image:: _static/googlelike_poa.png
 
-Mapa de calor (heatmap) dos Acidentes de Porto Alegre / RS
+Mapa de calor (heatmap) de Acidentes de Trânsito de Porto Alegre / RS
 ------------------------------------------------------------------------------
 
 .. image:: _static/heatmap.png
