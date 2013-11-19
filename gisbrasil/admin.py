@@ -28,6 +28,18 @@ class PortoAlegreEstacaoBikePoaAdmin(admin.GeoModelAdmin):
     list_display = ['dataset_id', 'numero', 'nome']
     search_fields = ['dataset_id', 'numero', 'nome']
 
+class PortoAlegreErbAdmin(admin.GeoModelAdmin):
+    list_display = ['dataset_id', 'empresa_01', 'empresa_02',
+        'empresa_03', 'empresa_04', 'site_01', 'site_02',
+         'site_03', 'site_04', 'nome_da_er', 'n13',
+         'bairro', 'tipo']
+    search_fields = ['dataset_id', 'nome_da_er', 'tipo', 'bairro',
+        'empresa_01', 'empresa_02', 'empresa_03', 'empresa_04', 
+        'site_01', 'site_02', 'site_03', 'site_04',]   
+    list_filter = ['tipo', 'empresa_01', 'empresa_02', 'empresa_03',
+        'empresa_04', 'tipo', 'bairro']
+
+
 class PortoAlegreParadaAdmin(admin.GeoModelAdmin):
     list_display = ['idparada', 'codigo', 'terminal']
     search_fields = ['idparada', 'codigo']
@@ -46,5 +58,6 @@ admin.site.register(PortoAlegreTaxi, PortoAlegreTaxiAdmin)
 admin.site.register(PortoAlegreEstacaoBikePoa, PortoAlegreEstacaoBikePoaAdmin)
 admin.site.register(PortoAlegreParada, PortoAlegreParadaAdmin)
 admin.site.register(PortoAlegreEixo, PortoAlegreEixoAdmin)
+admin.site.register(PortoAlegreErb, PortoAlegreErbAdmin)
 
 

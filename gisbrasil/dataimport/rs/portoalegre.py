@@ -71,6 +71,27 @@ class ParserParadas(Parser):
         item.terminal = row['terminal']
         return item
 
+class ParserErb(Parser):
+    def parse(self, row):
+        item = PortoAlegreErb()
+        item.dataset_id = row['_id']
+        item.empresa_01 = row['EMPRESA_01']
+        item.empresa_02 = row['EMPRESA_02']
+        item.empresa_03 = row['EMPRESA_03']
+        item.empresa_04 = row['EMPRESA_04']
+        item.site_01 = row['SITE_01']
+        item.site_02 = row['SITE_02']
+        item.site_03 = row['SITE_03']
+        item.site_04 = row['SITE_04']
+        item.nome_da_er = row['NOME_DA_ER']
+        item.n13 = row['N13']
+        item.bairro = row['BAIRRO']
+        item.tipo = row['TIPO']
+        item.coordenada = item.coordenada = self.latlng_to_wkt(row['LATITUDE'],
+            row['LONGITUDE'])
+        return item
+        
+
 class ParserAcidenteTransito(Parser):
     def parse(self, row):
         item = PortoAlegreAcidenteTransito()
@@ -280,4 +301,16 @@ class ParadasOnibus(DataPoaDataset):
         title = u'Dados de Paradas de Ônibus de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--onibus-portoalegre'
+
+class EstacoesRadioBase(DataPoaDataset):
+    def __init__(self):
+        super(EstacoesRadioBase, self).__init__()
+        self.resource_list = ['f1e9a6cb-6ff3-4a51-bece-a42190bef350']
+        self.parser = ParserErb()
+
+    class Meta:
+        title = u'Dados de Estações Rádio Base de Porto Alegre / RS'
+        source = u'DataPoa'
+        command = u'--erb-portoalegre'
+
 

@@ -137,6 +137,30 @@ class PortoAlegreTaxi(models.Model):
     def __unicode__(self):
         return self.endereco
 
+class PortoAlegreErb(models.Model):
+    TIPO_CHOICES = (
+        ('T', 'T'),
+        ('P', 'P'),
+    )
+    dataset_id = models.IntegerField(u'ID da ERB')
+    empresa_01 = models.CharField(max_length=50)
+    empresa_02 = models.CharField(max_length=50)
+    empresa_03 = models.CharField(max_length=50)
+    empresa_04 = models.CharField(max_length=50)
+    site_01 = models.CharField(max_length=50)
+    site_02 = models.CharField(max_length=50)
+    site_03 = models.CharField(max_length=50)
+    site_04 = models.CharField(max_length=50)
+    nome_da_er = models.CharField(max_length=50)
+    n13 = models.CharField(max_length=10)
+    bairro = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=2, choices=TIPO_CHOICES)
+    coordenada = models.PointField()
+
+    class Meta:
+        verbose_name = u'Porto Alegre - Estação Rádio Base'
+        verbose_name_plural = u'Porto Alegre - Estações Rádio Base'
+
 class PortoAlegreParada(models.Model):
     TERMINAL_CHOICES = (
         ('S', 'Sim'),

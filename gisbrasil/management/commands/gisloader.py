@@ -19,6 +19,7 @@ class Command(BaseCommand):
             rs.portoalegre.PontosTaxi(),
             rs.portoalegre.ParadasOnibus(),
             rs.portoalegre.Eixos(),
+            rs.portoalegre.EstacoesRadioBase()
         ]
         for dataset in self.datasets:
             dataset.register(self)
