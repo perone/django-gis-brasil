@@ -8,7 +8,7 @@ from gisbrasil.dataimport import brasil
 from gisbrasil.dataimport import rs
 
 class Command(BaseCommand):
-    help = 'Carrega os conjuntos de dados disponíveis para o banco de dados.'
+    help = u'Carrega os conjuntos de dados disponíveis para o banco de dados.'
 
     def __init__(self, *args, **kwargs):
         self.datasets = [
@@ -19,7 +19,7 @@ class Command(BaseCommand):
             rs.portoalegre.PontosTaxi(),
             rs.portoalegre.ParadasOnibus(),
             rs.portoalegre.Eixos(),
-            rs.portoalegre.EstacoesRadioBase()
+            rs.portoalegre.EstacoesRadioBase(),
         ]
         for dataset in self.datasets:
             dataset.register(self)
