@@ -245,6 +245,11 @@ basta utilizar o respectivo parâmetro para realizar a importação como no exem
 Changelog
 ========================================================
 
+Release v.0.4
+--------------------------------------------------------
+    - Integração do dataset de **Estações Rádio Base de Porto Alegre** de Porto ALegre/RS,
+      disponibilizado pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
+
 Release v.0.3 
 --------------------------------------------------------
 
