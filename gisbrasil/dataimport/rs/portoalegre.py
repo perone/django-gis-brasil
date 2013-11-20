@@ -149,6 +149,32 @@ class ParserBikePoa(Parser):
             row["LONGITUDE"])
         return item
 
+class ParserConteineresLixo(Parser):
+    def parse(self, row):
+        item = PortoAlegreConteineresLixo()
+        item._id = row['_id']
+        item.nro = row['NRO']
+        item.cap = row['CAP_']
+        item.cdl = row['CDL']
+        item.cat = row['CAT_']
+        item.prep = row['PREP_']
+        item.logradouro = row['LOGRADOURO']
+        item.lote = row['LOTE']
+        item.referencia = row['REFERENCIA']
+        item.passeio = row['PASSEIO']
+        item.area_azul = row['AREA_AZUL']
+        item.observacao = row['OBSERVACAO']
+        item.av_status = row['AV_STATUS']
+        item.av_score = row['AV_SCORE']
+        item.av_side = row['AV_SIDE']
+        try:     
+            item.coordenada = self.latlng_to_wkt(row['LATITUDE'],
+                row['LONGITUDE'])
+        except:
+            print 'Coordenada em formato inválido para registro ID %s ' % item._id
+            return None
+        return item
+
 class CkanDatasetImporter(object):
     datastore_dump = "/datastore/dump/"
 
@@ -312,5 +338,16 @@ class EstacoesRadioBase(DataPoaDataset):
         title = u'Dados de Estações Rádio Base de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--erb-portoalegre'
+
+class ConteineresLixo(DataPoaDataset):
+    def __init__(self):
+        super(ConteineresLixo, self).__init__()
+        self.resource_list = ['93d6ac81-d5f1-4b25-9324-473cd4e977cb']
+        self.parser = ParserConteineresLixo()
+
+    class Meta:
+        title = u'Dados dos Contêineres de Lixo Orgânico de Porto Alegre / RS'
+        source = u'DataPoa'
+        command = u'--conteineres-portoalegre'
 
 

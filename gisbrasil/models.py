@@ -161,6 +161,52 @@ class PortoAlegreErb(models.Model):
         verbose_name = u'Porto Alegre - Estação Rádio Base'
         verbose_name_plural = u'Porto Alegre - Estações Rádio Base'
 
+    def __unicode__(self):
+        return self.nome_da_er
+
+class PortoAlegreConteineresLixo(models.Model):
+    YN_CHOICES = (
+        ('x', 'Sim'),
+        ('', 'Não'),
+    )
+
+    AV_STATUS_CHOICES = (
+        ('M', 'M'),
+        ('U', 'U'),
+    )
+
+    AV_SIDE_CHOICES = (
+        ('L', 'L'),
+        ('R', 'R'),
+    )
+
+    _id = models.IntegerField('Dataset ID')
+    nro = models.IntegerField(u'Número', null=True)
+    cap = models.IntegerField('Cap', null= True)
+    cdl = models.IntegerField('CDL', null= True)
+    cat = models.CharField(max_length=10, null= True)
+    prep = models.CharField(max_length=50, null= True)
+    logradouro = models.CharField(max_length=100)
+    lote = models.IntegerField('Lote', null= True)
+    referencia = models.CharField(max_length=200)
+    passeio = models.CharField(max_length=2, choices=YN_CHOICES)
+    area_azul = models.CharField(max_length=2, choices=YN_CHOICES)
+    observacao = models.CharField(max_length=200)
+    av_status = models.CharField(max_length=2, choices=AV_STATUS_CHOICES)
+    av_score = models.IntegerField('Av Score', null= True)
+    av_side = models.CharField(max_length=2, choices=AV_SIDE_CHOICES)
+    coordenada = models.PointField()
+
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = u'Porto Alegre - Contêiner de Lixo'
+        verbose_name_plural = u'Porto Alegre - Contêineres de Lixo'
+
+    def __unicode__(self):
+        return '%s' % self.nro
+
+
 class PortoAlegreParada(models.Model):
     TERMINAL_CHOICES = (
         ('S', 'Sim'),
