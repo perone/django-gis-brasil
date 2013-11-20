@@ -283,6 +283,10 @@ Release v.0.1
 Licença
 ========================================================
 
+O Django GIS Brasil utiliza a permissiva `licença BSD <http://en.wikipedia.org/wiki/BSD_licenses>`_,
+uma licença conhecida e muito utilizada na comunidade *open-source*. Você pode utilizar o Django
+GIS Brasil em seu projeto proprietário sem problema algum.
+
 Mais informações::
 
     Copyright (c) 2013, CodeFi.sh
