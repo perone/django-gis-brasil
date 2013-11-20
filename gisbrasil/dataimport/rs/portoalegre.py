@@ -87,7 +87,7 @@ class ParserErb(Parser):
         item.n13 = row['N13']
         item.bairro = row['BAIRRO']
         item.tipo = row['TIPO']
-        item.coordenada = item.coordenada = self.latlng_to_wkt(row['LATITUDE'],
+        item.coordenada = self.latlng_to_wkt(row['LATITUDE'],
             row['LONGITUDE'])
         return item
         

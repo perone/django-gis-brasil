@@ -13,7 +13,7 @@ install_requirements = [
 
 setup(
     name='django-gis-brasil',
-    version='0.3',
+    version='0.4',
     packages=['gisbrasil', 'gisbrasil.management',
         'gisbrasil.management.commands', 'gisbrasil.dataimport',
         'gisbrasil.dataimport.rs'],
