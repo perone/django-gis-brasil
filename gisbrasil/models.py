@@ -164,6 +164,35 @@ class PortoAlegreErb(models.Model):
     def __unicode__(self):
         return self.nome_da_er
 
+class PortoAlegreLixeiras(models.Model):
+    CATEGORIA_CHOICES = (
+        ('AV', 'Avenida'),
+        ('LG', 'Largo'),
+        ('PCA', 'Praça'),
+        ('R', 'Rua'),
+    )
+    _id = models.IntegerField('Dataset ID')
+    cod_lograd = models.IntegerField(u'Código do Logradouro')
+    categoria = models.CharField(max_length=5, choices=CATEGORIA_CHOICES)
+    preposicao = models.CharField(max_length=10, null=True)
+    nome = models.CharField(max_length=100, null=True)
+    lote = models.IntegerField('Lote')
+    secao = models.CharField(max_length=50)
+    referencia = models.CharField(max_length=100, null=True)
+    data_insta = models.CharField(max_length=100)
+    observacao = models.CharField(max_length=500, null=True)
+    coordenada = models.PointField()
+
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = u'Porto Alegre - Lixeira'
+        verbose_name_plural = u'Porto Alegre - Lixeiras'
+
+    def __unicode__(self):
+        return '%s , %s' % (self.nome, self.lote)
+
+
 class PortoAlegreConteineresLixo(models.Model):
     YN_CHOICES = (
         ('x', 'Sim'),
@@ -182,18 +211,18 @@ class PortoAlegreConteineresLixo(models.Model):
 
     _id = models.IntegerField('Dataset ID')
     nro = models.IntegerField(u'Número', null=True)
-    cap = models.IntegerField('Cap', null= True)
-    cdl = models.IntegerField('CDL', null= True)
-    cat = models.CharField(max_length=10, null= True)
-    prep = models.CharField(max_length=50, null= True)
+    cap = models.IntegerField('Cap', null=True)
+    cdl = models.IntegerField('CDL', null=True)
+    cat = models.CharField(max_length=10, null=True)
+    prep = models.CharField(max_length=50, null=True)
     logradouro = models.CharField(max_length=100)
-    lote = models.IntegerField('Lote', null= True)
+    lote = models.IntegerField('Lote', null=True)
     referencia = models.CharField(max_length=200)
     passeio = models.CharField(max_length=2, choices=YN_CHOICES)
     area_azul = models.CharField(max_length=2, choices=YN_CHOICES)
     observacao = models.CharField(max_length=200)
     av_status = models.CharField(max_length=2, choices=AV_STATUS_CHOICES)
-    av_score = models.IntegerField('Av Score', null= True)
+    av_score = models.IntegerField('Av Score', null=True)
     av_side = models.CharField(max_length=2, choices=AV_SIDE_CHOICES)
     coordenada = models.PointField()
 
