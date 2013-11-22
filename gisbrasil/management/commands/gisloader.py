@@ -21,6 +21,7 @@ class Command(BaseCommand):
             rs.portoalegre.Eixos(),
             rs.portoalegre.EstacoesRadioBase(),
             rs.portoalegre.ConteineresLixo(),
+            rs.portoalegre.Lixeiras(),
         ]
         for dataset in self.datasets:
             dataset.register(self)

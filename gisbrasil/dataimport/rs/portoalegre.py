@@ -175,6 +175,28 @@ class ParserConteineresLixo(Parser):
             return None
         return item
 
+class ParserLixeiras(Parser):
+    def parse(self, row):
+        item = PortoAlegreLixeiras()
+        item._id = row['_id']
+        item.cod_lograd = row['COD_LOGRAD']
+        item.categoria = row['CATEGORIA']
+        item.preposicao = row['PREPOSICAO']
+        item.nome = row['NOME']
+        item.lote = row['LOTE']
+        item.secao = row['SECAO']
+        item.referencia = row['REFERENCIA']
+        item.data_insta = row['DATA_INSTA']
+        item.observacao = row['OBSERVACAO']
+        try:     
+            item.coordenada = self.latlng_to_wkt(row['LATITUDE'],
+                row['LONGITUDE'])
+        except:
+            print 'Coordenada em formato inválido para registro ID %s ' % item._id
+            return None
+        return item        
+
+
 class CkanDatasetImporter(object):
     datastore_dump = "/datastore/dump/"
 
@@ -349,5 +371,16 @@ class ConteineresLixo(DataPoaDataset):
         title = u'Dados dos Contêineres de Lixo Orgânico de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--conteineres-portoalegre'
+
+class Lixeiras(DataPoaDataset):
+    def __init__(self):
+        super(Lixeiras, self).__init__()
+        self.resource_list = ['3076913f-38dd-4634-b26e-305c80d88576']
+        self.parser = ParserLixeiras()
+
+    class Meta:
+        title = u'Dados dos Lixeiras de Porto Alegre / RS'
+        source = u'DataPoa'
+        command = u'--lixeiras-portoalegre'
 
 

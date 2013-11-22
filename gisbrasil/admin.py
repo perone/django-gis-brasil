@@ -46,6 +46,10 @@ class PortoAlegreConteineresLixoAdmin(admin.GeoModelAdmin):
     list_filter = ['passeio', 'cat', 'area_azul', 'av_status',
         'av_side']
 
+class PortoAlegreLixeirasAdmin(admin.GeoModelAdmin):
+    list_display = ['cod_lograd', 'nome', 'referencia', 'lote', 'data_insta', 'categoria']
+    list_filter = ['categoria', 'data_insta', 'secao']
+
 class PortoAlegreParadaAdmin(admin.GeoModelAdmin):
     list_display = ['idparada', 'codigo', 'terminal']
     search_fields = ['idparada', 'codigo']
@@ -66,5 +70,6 @@ admin.site.register(PortoAlegreParada, PortoAlegreParadaAdmin)
 admin.site.register(PortoAlegreEixo, PortoAlegreEixoAdmin)
 admin.site.register(PortoAlegreErb, PortoAlegreErbAdmin)
 admin.site.register(PortoAlegreConteineresLixo, PortoAlegreConteineresLixoAdmin)
+admin.site.register(PortoAlegreLixeiras, PortoAlegreLixeirasAdmin)
 
 
