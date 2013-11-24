@@ -247,8 +247,13 @@ Changelog
 
 Release v.0.4
 --------------------------------------------------------
-    - Integração do dataset de **Estações Rádio Base de Porto Alegre** de Porto Alegre/RS,
+    - Integração do dataset de **Estações Rádio Base** de Porto Alegre/RS,
       disponibilizado pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
+    - Integração do dataset de **Contêineres de Lixo** de Porto Alegre/RS,
+      disponibilizado pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
+    - Integração do dataset de **Lixeiras** de Porto Alegre/RS,
+      disponibilizado pela prefeitura do município no projeto `DataPoa <http://www.datapoa.com.br/>`_ ;
+      
 
 Release v.0.3 
 --------------------------------------------------------
