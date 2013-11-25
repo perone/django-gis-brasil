@@ -122,6 +122,32 @@ class PortoAlegreEstacaoBikePoa(models.Model):
     def __unicode__(self):
         return u'ID: %s, Nome da estação: %s' % (self.dataset_id, self.nome)
 
+class PortoAlegreEspacoCultural(models.Model):
+    _id = models.IntegerField('Dataset ID')
+    endereco = models.CharField(max_length=200)
+    complemento = models.CharField(max_length=100, null=True)
+    cidade = models.CharField(max_length=100)
+    estado = models.CharField(max_length=100)
+    codigo_postal = models.CharField(max_length=20, null=True)
+    name = models.CharField(max_length=200)
+    telefone = models.CharField(max_length=100, null=True)
+    bairro = models.CharField(max_length=100, null=True)
+    regiao_op = models.CharField(max_length=50, null=True)
+    url = models.CharField(max_length=200, null=True)
+    tipo = models.CharField(max_length=100, null=True)
+    categoria = models.CharField(max_length=100, null=True)
+    coordenada = models.PointField()
+    endereco_formatado = models.CharField(max_length=400)
+
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = u'Porto Alegre - Espaço Cultural'
+        verbose_name_plural = u'Porto Alegre - Espaços Culturais'
+
+    def __unicode__(self):
+        return '%s - %s' % (self.name, self.endereco_formatado)
+
 class PortoAlegreTaxi(models.Model):
     idtaxi = models.IntegerField(u'ID do Táxi')
     endereco = models.CharField(max_length=300)
@@ -193,7 +219,7 @@ class PortoAlegreLixeiras(models.Model):
         return '%s , %s' % (self.nome, self.lote)
 
 
-class PortoAlegreConteineresLixo(models.Model):
+class PortoAlegreConteinerLixo(models.Model):
     YN_CHOICES = (
         ('x', 'Sim'),
         ('', 'Não'),

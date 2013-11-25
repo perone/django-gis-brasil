@@ -149,9 +149,9 @@ class ParserBikePoa(Parser):
             row["LONGITUDE"])
         return item
 
-class ParserConteineresLixo(Parser):
+class ParserConteinerLixo(Parser):
     def parse(self, row):
-        item = PortoAlegreConteineresLixo()
+        item = PortoAlegreConteinerLixo()
         item._id = row['_id']
         item.nro = row['NRO']
         item.cap = row['CAP_']
@@ -187,15 +187,39 @@ class ParserLixeiras(Parser):
         item.secao = row['SECAO']
         item.referencia = row['REFERENCIA']
         item.data_insta = row['DATA_INSTA']
-        item.observacao = row['OBSERVACAO']
+        item.observacao = row['OBSERVACAOo']
         try:     
             item.coordenada = self.latlng_to_wkt(row['LATITUDE'],
                 row['LONGITUDE'])
         except:
             print 'Coordenada em formato inválido para registro ID %s ' % item._id
             return None
-        return item        
+        return item
 
+class ParserEspacosCulturais(Parser):
+    def parse(self, row):
+        item = PortoAlegreEspacoCultural()
+        item._id = row['_id']
+        item.endereco = row['Endereço']
+        item.complemento = row['Complemento']
+        item.cidade = row['Cidade']
+        item.estado = row['Estado']
+        item.codigo_postal = row['CódigoPostal']
+        item.name = row['Name']
+        item.telefone = row['Telefone']
+        item.bairro = row['Bairro']
+        item.regiao_op = row['Região OP']
+        item.url = row['URL']
+        item.tipo = row['Tipo']
+        item.categoria = row['Categoria']
+        item.endereco_formatado = row['Endereço Formatado']
+        try:     
+            item.coordenada = self.latlng_to_wkt(row['Latitude'],
+                row['Longitude'])
+        except:
+            print 'Coordenada em formato inválido para registro ID %s ' % item._id
+            return None
+        return item
 
 class CkanDatasetImporter(object):
     datastore_dump = "/datastore/dump/"
@@ -365,12 +389,24 @@ class ConteineresLixo(DataPoaDataset):
     def __init__(self):
         super(ConteineresLixo, self).__init__()
         self.resource_list = ['93d6ac81-d5f1-4b25-9324-473cd4e977cb']
-        self.parser = ParserConteineresLixo()
+        self.parser = ParserConteinerLixo()
 
     class Meta:
         title = u'Dados dos Contêineres de Lixo Orgânico de Porto Alegre / RS'
         source = u'DataPoa'
         command = u'--conteineres-portoalegre'
+
+class EspacosCulturais(DataPoaDataset):
+    def __init__(self):
+        super(EspacosCulturais, self).__init__()
+        self.resource_list = ['1ac41c33-fcd5-4b42-890f-a7bad6216663']
+        self.parser = ParserEspacosCulturais()
+
+    class Meta:
+        title = u'Dados dos Espaços Culturais de Porto Alegre / RS'
+        source = u'DataPoa'
+        command = u'--espacosculturais-portoalegre'
+
 
 class Lixeiras(DataPoaDataset):
     def __init__(self):
